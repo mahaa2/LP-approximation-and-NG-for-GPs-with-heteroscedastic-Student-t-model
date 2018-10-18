@@ -6,6 +6,6 @@ To use the following files you need to :
 
 - Install GP-Stuff software https://github.com/gpstuff-dev/gpstuff
 - Create a folder and include the files contained in this git-hub link.
-- run the files.
+- run the file demo_heteroscedasticstudent.m
 
 Always have fun while learning.
