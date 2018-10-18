@@ -11,7 +11,7 @@ pl2 = prior_invt('s2', 1);
 likheteTNF = lik_inputdependentSt2('sig2', 1, 'sig2_prior', ...
     [], 'nu', 20, 'nu_prior', nup, 'fisher', 'off');
 
-% heteroscedastic student-model with traditional FL approximation
+% heteroscedastic student-model with traditional LF approximation
 likheteF = lik_inputdependentSt2('sig2', 1, 'sig2_prior', ...
     [], 'nu', 20, 'nu_prior', nup, 'fisher', 'on');
 
@@ -40,7 +40,7 @@ gpC{2} = gp_set('lik', likheteF, 'cf', {cf1 cf2}, 'comp_cf', {1 2});
 rng(5);
 
 % full data 
-L = load('datasets/motorcycle.mat');
+L = load('/motorcycle.mat');
 
 [n, ~] = size(L.x);                      % sample size
 y = L.y;                                 % measured data
@@ -50,7 +50,7 @@ x = L.x;                                 % covariates
 Ey   = cell(1, 2); Ef   = cell(1, 2);
 Vary = cell(1, 2); Varf = cell(1, 2);
 
-% find the MAP estimate of the hyperposterior
+% find the MAP estimate of the approximate hyperposterior
 for m = 1:2
     go = 0;
     while go == 0
@@ -123,12 +123,7 @@ for m = 1:2
     
     h = legend(p, 'measured data', 'expected value for future data', 'uncertainty (variance)', ...
         'outlier region', 'location', 'southeast'); 
-
-    % ylim([min(Ey{m}-1.96*sqrt(Vary{m})) max(Ey{m}+1.96*sqrt(Vary{m}))]);
-    % set(s, 'pos', get(s, 'pos') + [-0.05 -0.04 0.02 0.06], 'Visible', 'off', ...
-    %    'YTick', [], 'XTick', [], 'xtick', [],  'FontSize', 11);
-    % text(min(x), max(p(1).YData) + 4, 'Data prediction', 'FontSize', 14);
-   
+ 
 end
 
 
